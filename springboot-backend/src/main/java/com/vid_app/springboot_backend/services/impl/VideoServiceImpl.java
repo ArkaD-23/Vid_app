@@ -1,19 +1,45 @@
 package com.vid_app.springboot_backend.services.impl;
 
-import java.util.List;
+import java.util.*;
+import java.io.*;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.util.StringUtils;
 
 import com.vid_app.springboot_backend.entities.Video;
 import com.vid_app.springboot_backend.services.VideoService;
 
 @Service
 public class VideoServiceImpl implements VideoService {
+    
+    @Value("${files.video}")
+    String DIR;
 
     @Override
-    public Video save(Video video, Video file) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'save'");
+    public Video save(Video video, MultipartFile file) {
+        
+
+        try {    
+            String filename = file.getOriginalFilename();
+            String contentType = file.getContentType();
+            InputStream inputstream = file.getInputStream();
+
+            String cleanFileName = StringUtils.cleanPath(filename);
+            String cleanDIR = StringUtils.cleanPath(DIR);
+
+            Path path = Paths.get(cleanDIR, cleanFileName);
+
+            System.out.println(path);
+            System.out.println(contentType);
+ 
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     @Override
