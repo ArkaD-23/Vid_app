@@ -1,4 +1,4 @@
-package com.vid_app.payload;
+package com.vid_app.springboot_backend.payload;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
