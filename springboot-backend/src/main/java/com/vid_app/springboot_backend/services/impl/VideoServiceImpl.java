@@ -13,11 +13,27 @@ import org.springframework.util.StringUtils;
 import com.vid_app.springboot_backend.entities.Video;
 import com.vid_app.springboot_backend.services.VideoService;
 
+import jakarta.annotation.PostConstruct;
+
 @Service
 public class VideoServiceImpl implements VideoService {
     
     @Value("${files.video}")
     String DIR;
+
+    @PostConstruct
+    public void init() {
+
+        System.out.println("Video directory: " + DIR);
+        File file = new File(DIR);
+
+        if(!file.exists()) {
+            file.mkdir();
+            System.out.println("Folder created successfully.....");
+        } else {
+            System.out.println("Folder already exists.....");
+        } 
+    }
 
     @Override
     public Video save(Video video, MultipartFile file) {
