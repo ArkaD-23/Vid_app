@@ -2,15 +2,18 @@ package com.vid_app.springboot_backend.services.impl;
 
 import java.util.*;
 import java.io.*;
+import java.nio.file.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.util.StringUtils;
 
 import com.vid_app.springboot_backend.entities.Video;
+import com.vid_app.springboot_backend.repositories.VideoRepository;
 import com.vid_app.springboot_backend.services.VideoService;
 
 import jakarta.annotation.PostConstruct;
@@ -20,6 +23,13 @@ public class VideoServiceImpl implements VideoService {
     
     @Value("${files.video}")
     String DIR;
+
+    @Autowired
+    private VideoRepository videoRepository;
+
+    public VideoServiceImpl(VideoRepository videoRepository) {
+        this.videoRepository = videoRepository;
+    }
 
     @PostConstruct
     public void init() {
@@ -44,18 +54,33 @@ public class VideoServiceImpl implements VideoService {
             String contentType = file.getContentType();
             InputStream inputstream = file.getInputStream();
 
+            //file path
             String cleanFileName = StringUtils.cleanPath(filename);
+            
+            //folder path
             String cleanDIR = StringUtils.cleanPath(DIR);
 
+            //folder path with filename
             Path path = Paths.get(cleanDIR, cleanFileName);
-
             System.out.println(path);
             System.out.println(contentType);
- 
+
+            //copy file to the folder
+            Files.copy(inputstream, path, StandardCopyOption.REPLACE_EXISTING);
+
+            //video meta data
+            video.setContentType(contentType);
+            video.setFilePath(path.toString());
+
+            //meta data save
+            videoRepository.save(video);
+
+            return video;
+            
         } catch (Exception e) {
             e.printStackTrace();
+            return null;
         }
-        return null;
     }
 
     @Override

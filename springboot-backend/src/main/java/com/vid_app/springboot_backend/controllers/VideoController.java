@@ -2,6 +2,8 @@ package com.vid_app.springboot_backend.controllers;
 
 import java.util.UUID;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,7 +26,7 @@ public class VideoController {
     }
 
     @PostMapping("/videos")
-    public ResponseEntity<CustomMessage> create(
+    public ResponseEntity<?> create(
         @RequestParam("file") MultipartFile file,
         @RequestParam("title") String title,
         @RequestParam("description") String description
@@ -35,9 +37,19 @@ public class VideoController {
             video.setDescription(description);
             video.setVideoId(UUID.randomUUID().toString());
 
-            videoService.save(video, file);
-
-            CustomMessage message = new CustomMessage("Video uploaded successfully", true);
-            return ResponseEntity.ok(message);
+            Video savedVideo = videoService.save(video, file);
+            if(savedVideo != null) {
+                return ResponseEntity
+                        .status(HttpStatus.OK)
+                        .body(video);
+            } else {
+                return ResponseEntity
+                        .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                        .body(CustomMessage.builder()
+                                .message("Video not uploaded.....")
+                                .success(false)
+                                .build()
+                        );
+            }
     }
 }
