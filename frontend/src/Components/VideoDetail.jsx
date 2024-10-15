@@ -12,13 +12,13 @@ import { Videos, Loader } from "./";
 import { fetchFromAPI } from "../utils/fetchFromAPI";
 
 const VideoDetail = () => {
-  const [videoDetail, setVideoDetail] = useState(null);
-  const [videos, setVideos] = useState(null);
-  {/*const [likes, setLikes] = useState(0);
-  const [dislikes, setDislikes] = useState(0);
-  const [liked, setLiked] = useState(false);
-const [disliked, setDisliked] = useState(false);*/}
-  const { id } = useParams();
+  // const [videoDetail, setVideoDetail] = useState(null);
+  // const [videos, setVideos] = useState(null);
+  // const [likes, setLikes] = useState(0);
+  // const [dislikes, setDislikes] = useState(0);
+  // const [liked, setLiked] = useState(false);
+  // const [disliked, setDisliked] = useState(false);
+  // const { id } = useParams();
 
   {/*const handleLike = () => {
     if (!liked) {
@@ -48,22 +48,22 @@ const [disliked, setDisliked] = useState(false);*/}
     }
   };*/}
 
-  useEffect(() => {
-    fetchFromAPI(`videos?part=snippet,statistics&id=${id}`).then((data) =>
-      setVideoDetail(data.items[0])
-    );
+  // useEffect(() => {
+  //   fetchFromAPI(`videos?part=snippet,statistics&id=${id}`).then((data) =>
+  //     setVideoDetail(data.items[0])
+  //   );
 
-    fetchFromAPI(`search?part=snippet&relatedToVideoId=${id}&type=video`).then(
-      (data) => setVideos(data.items)
-    );
-  }, [id]);
+  //   fetchFromAPI(`search?part=snippet&relatedToVideoId=${id}&type=video`).then(
+  //     (data) => setVideos(data.items)
+  //   );
+  // }, [id]);
 
-  if (!videoDetail?.snippet) return <Loader />;
+  // if (!videoDetail?.snippet) return <Loader />;
 
-  const {
-    snippet: { title, channelId, channelTitle },
-    statistics: { viewCount, likeCount },
-  } = videoDetail;
+  // const {
+  //   snippet: { title, channelId, channelTitle },
+  //   statistics: { viewCount, likeCount },
+  // } = videoDetail;
 
   return (
     <Box minHeight="95vh">
@@ -71,12 +71,11 @@ const [disliked, setDisliked] = useState(false);*/}
         <Box flex={1}>
           <Box sx={{ width: "100%", position: "sticky", top: "86px" }}>
             <ReactPlayer
-              url={`https://www.youtube.com/watch?v=${id}`}
+              url={`https://www.youtube.com/watch?v=2`}
               className="react-player"
               controls
             />
             <Typography color="#fff" variant="h5" fontWeight="bold" p={2}>
-              {title}
             </Typography>
             <Stack
               direction="row"
@@ -85,12 +84,11 @@ const [disliked, setDisliked] = useState(false);*/}
               py={1}
               px={2}
             >
-              <Link to={`/channel/${channelId}`}>
+              <Link to={`/channel`}>
                 <Typography
                   variant={{ sm: "subtitle1", md: "h6" }}
                   color="#fff"
                 >
-                  {channelTitle}
                   <CheckCircleIcon
                     sx={{ fontSize: "12px", color: "gray", ml: "5px" }}
                   />
@@ -98,7 +96,7 @@ const [disliked, setDisliked] = useState(false);*/}
               </Link>
               <Stack direction="row" gap="20px" alignItems="center">
                 <Typography variant="body1" sx={{ opacity: 0.7 }}>
-                  {parseInt(viewCount).toLocaleString()} views
+                   views
                 </Typography>
                {/*<Button
                   onClick={handleLike}
@@ -117,7 +115,7 @@ const [disliked, setDisliked] = useState(false);*/}
                   Dislike {dislikes}
   </Button>*/}
                 <Typography variant="body1" sx={{ opacity: 0.7 }}>
-                  {parseInt(likeCount).toLocaleString()} likes
+                  likes
                 </Typography>
               </Stack>
             </Stack>
@@ -129,7 +127,7 @@ const [disliked, setDisliked] = useState(false);*/}
           justifyContent="center"
           alignItems="center"
         >
-          <Videos videos={videos} direction="column" />
+          <Videos  direction="column" />
         </Box>
       </Stack>
     </Box>
