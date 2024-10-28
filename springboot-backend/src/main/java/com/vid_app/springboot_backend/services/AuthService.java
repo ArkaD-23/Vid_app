@@ -1,12 +1,16 @@
 package com.vid_app.springboot_backend.services;
 
+import java.util.List;
+
+import com.vid_app.springboot_backend.dto.UserDto;
 import com.vid_app.springboot_backend.entities.User;
 
 public interface AuthService {
     
-    User signup(String username, String password, String email);
+    void saveUser(UserDto userDto);
 
-    User signin(String email, String password);
+    User findUserByEmail(String email);
 
-    User signout(String userId);
+    List<UserDto> findAllUsers();
+    
 }
