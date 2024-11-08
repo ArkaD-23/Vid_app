@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.vid_app.springboot_backend.auth.entities.User;
 import com.vid_app.springboot_backend.dto.UserDto;
-import com.vid_app.springboot_backend.entities.User;
 import com.vid_app.springboot_backend.services.UserService;
 
 import jakarta.validation.Valid;
