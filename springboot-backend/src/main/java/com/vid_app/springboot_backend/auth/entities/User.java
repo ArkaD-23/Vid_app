@@ -1,4 +1,4 @@
-package com.vid_app.springboot_backend.entities;
+package com.vid_app.springboot_backend.auth.entities;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
