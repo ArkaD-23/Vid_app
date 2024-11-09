@@ -8,8 +8,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.vid_app.springboot_backend.auth.entities.User;
+import com.vid_app.springboot_backend.auth.repositories.UserRepository;
 import com.vid_app.springboot_backend.dto.UserDto;
-import com.vid_app.springboot_backend.repositories.UserRepository;
 import com.vid_app.springboot_backend.services.UserService;
 
 @Service

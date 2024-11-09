@@ -3,10 +3,11 @@ package com.vid_app.springboot_backend.auth.config;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
-import com.vid_app.springboot_backend.repositories.UserRepository;
+import com.vid_app.springboot_backend.auth.repositories.UserRepository;
 
 @Configuration
 public class ApplicationConfig {
+    
     private final UserRepository userRepository;
 
     public ApplicationConfig(UserRepository userRepository) {
