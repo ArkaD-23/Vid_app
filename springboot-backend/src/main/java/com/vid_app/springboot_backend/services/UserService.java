@@ -1,16 +1,17 @@
-package com.vid_app.springboot_backend.services;
+// package com.vid_app.springboot_backend.services;
 
-import java.util.List;
+// import java.util.List;
+// import java.util.Optional;
 
-import com.vid_app.springboot_backend.auth.entities.User;
-import com.vid_app.springboot_backend.dto.UserDto;
+// import com.vid_app.springboot_backend.auth.entities.User;
+// import com.vid_app.springboot_backend.dto.UserDto;
 
-public interface UserService {
+// public interface UserService {
     
-    void saveUser(UserDto userDto);
+//     void saveUser(UserDto userDto);
 
-    User findUserByEmail(String email);
+//     Optional<User> findUserByEmail(String email);
 
-    List<UserDto> findAllUsers();
+//     List<UserDto> findAllUsers();
 
-}
+// }
