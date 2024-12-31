@@ -10,7 +10,7 @@ import com.vid_app.springboot_backend.auth.entities.User;
 
 import jakarta.transaction.Transactional;
 
-public interface UserRepository extends JpaRepository<User, String>{
+public interface UserRepository1 extends JpaRepository<User, String>{
     
     Optional<User> findByEmail(String username);
 
